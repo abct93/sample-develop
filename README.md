@@ -5,7 +5,7 @@
 [外部ドメインのWeb Workerを利用する](https://blog.abct93.com/sample-develop/html/SampleWorker.html)
 
 ### Javascript
-[WorkerURL](https://blog.abct93.com/sample-develop/js/WorkerUrl.js)
+[Worker URL](https://blog.abct93.com/sample-develop/js/WorkerUrl.js)
 
 [外部ドメインのWebWorkerを利用する](https://blog.abct93.com/sample-develop/js/SampleWorker.js)
 
