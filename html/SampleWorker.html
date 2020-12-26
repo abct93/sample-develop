@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Worker</title>
+</head>
+<body>
+    <button id="btn" type="button">実行</button>
+    <ol id="result-area"></ol>
+    <script>
+        (function () {
+            const crossOriginScriptUrl = 'https://blog.abct93.com/sample-develop/js/SampleWorker.js';
+
+            const workerUrl = getWorkerURL(crossOriginScriptUrl);
+            const myWorker = new Worker(workerUrl);
+
+            const list = document.getElementById('result-area');
+            myWorker.onmessage = function (event) {
+                const li = document.createElement('li');
+                li.appendChild(document.createTextNode(event.data));
+                list.append(li);
+            };
+
+            URL.revokeObjectURL(workerUrl);
+
+            document.getElementById('btn').addEventListener('click', () => {
+                const value1 = Math.floor(Math.random() * 1000);
+                const value2 = Math.random() * 1000;
+                myWorker.postMessage([value1, value2]);
+            });
+
+            function getWorkerURL(url) {
+                const content = `importScripts("${url}");`;
+                return URL.createObjectURL(new Blob([content], {type: 'text/javascript'}));
+            }
+        })();
+    </script>
+</body>
+</html>
