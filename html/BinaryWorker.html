@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File to Binary</title>
+    <style>
+        #input-group {
+            text-align: center;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        label {
+            background: #1E90FF;
+            padding: 10px 30px;
+            border-radius: 10px;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+        label:hover {
+            opacity: 0.5;
+        }
+        label::after {
+            content: "選択されていません";
+            font-size: 14px;
+            height: 20px;
+            line-height: 20px;
+            position: absolute;
+            right: -140px;
+            top: calc(50% - 10px);
+        }
+        label.changed::after {
+            content: "";
+        }
+        .result-container {
+            width: 90%;
+            margin: 1rem auto;
+            display: flex;
+            justify-content: center;
+            border: 1px solid lightgray;
+            border-radius: 6px;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="input-group">
+        <input type="file" id="fileselect"><label for="fileselect" id="input-label">ファイルを選択</label>
+    </div>
+    <div class="result-container" id="result">
+        <pre id="pre1"></pre>
+    </div>
+    <script src="https://blog.abct93.com/sample-develop/js/WorkerUrl.js"></script>
+    <script>
+        const BinaryURL = 'https://blog.abct93.com/sample-develop/js/File2Binary.js';
+
+        const binUrl = getWorkerURL(BinaryURL);
+        const binaryWorker = new Worker(binUrl);
+        URL.revokeObjectURL(binUrl);
+
+        binaryWorker.onmessage = function (event) {
+            console.log(event.data);
+            if (!event.data.success) {
+                alert(event.data.cause);
+                return;
+            }
+            document.getElementById('pre1').innerHTML = event.data.binary;
+            document.getElementById('result').style.visibility = 'visible';
+        };
+
+        window.addEventListener('load', () => {
+            document.getElementById('fileselect').addEventListener('change', e => {
+                const input = e.target;
+                if (input.files.length == 0) return;
+                const file = input.files[0];
+                if (!file) return;
+                if (file.size > 50 * 1024 * 1024) {
+                    alert('Please select a file smaller than 50kb');
+                    return;
+                }
+                binaryWorker.postMessage(file);
+            });
+        });
+    </script>
+</body>
+</html>
