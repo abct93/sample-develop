@@ -12,3 +12,4 @@
 [GeoJSON to GPX](https://blog.abct93.com/sample-develop/js/GpxConvert.js)
 
 [File to Binary](https://blog.abct93.com/sample-develop/js/File2Binary.js)
+最終更新日: 2020/12/27
