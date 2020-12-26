@@ -9,4 +9,4 @@
 
 [GeoJSON to GPX](https://blog.abct93.com/sample-develop/js/GpxConvert.js)
 
-[File to Binary](https://blog.abct93.com/sample-develop/js/File2Binary.js)
+[File to BinaryData](https://blog.abct93.com/sample-develop/js/File2Binary.js)
