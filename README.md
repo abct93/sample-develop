@@ -4,6 +4,8 @@
 ### HTML
 [外部ドメインのWeb Workerを利用する](https://blog.abct93.com/sample-develop/html/SampleWorker.html)
 
+[File To Binary](https://blog.abct93.com/sample-develop/html/BinaryWorker.html)
+
 ### Javascript
 [Worker URL](https://blog.abct93.com/sample-develop/js/WorkerUrl.js)
 
